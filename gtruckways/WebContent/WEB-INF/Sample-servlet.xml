@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						 http://www.springframework.org/schema/mvc
+       					 http://www.springframework.org/schema/mvc/spring-mvc.xsd    
+						http://www.springframework.org/schema/context    
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- base package component -->
+	<context:component-scan base-package="com.cogzy.gtruckways.controller"></context:component-scan>
+
+	<!-- SMTP Gmail Mail Sending Configuration -->
+
+
+
+
+
+	<!-- View Resolver configuration -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- Css,js and image configuration -->
+	<mvc:default-servlet-handler/>
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/fonts/*" location="/fonts/" />
+	<mvc:resources mapping="/font/*" location="/font/" />
+	<!-- <mvc:resources mapping="/font/roboto/*" location="/font/roboto/" /> -->
+	<mvc:annotation-driven />
+
+
+
+	<!-- Database configuration  -->
+	<!-- Server -->
+
+  <bean id="ds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://truckways.cqtlmt2h983q.ap-south-1.rds.amazonaws.com:3306/truckways"></property>
+		<property name="username" value="cogzy"></property>
+		<property name="password" value="cogzy123"></property>
+	</bean>
+          
+<!--    <bean id="ds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://13.126.10.135:3306/truckways"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean> -->
+
+ <!-- <bean id="ds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/truckways"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>  -->
+ 
+
+	
+	<!-- spring Jdbc template -->
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+
+
+	<!-- Dao's is mapped with JDBC Template -->
+	<bean id="DAO" class="com.cogzy.gtruckways.daoImpl.GetPriceDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+ 
+ <bean id="service" class="com.cogzy.gtruckways.serviceImpl.GetPriceServiceImpl">
+		<property name="dao" ref="DAO"></property>
+	</bean>
+	
+		<bean id="dao2" class="com.cogzy.gtruckways.daoImpl.UserDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+ <bean id="userservice" class="com.cogzy.gtruckways.serviceImpl.UserServiceImpl">
+		<property name="udao" ref="dao2"></property>
+	</bean>
+	
+	
+		<bean id="dao3" class="com.cogzy.gtruckways.daoImpl.PostDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+ <bean id="postservice" class="com.cogzy.gtruckways.serviceImpl.PostServiceImpl">
+		<property name="pdao" ref="dao3"></property>
+	</bean>
+	
+	<bean id="otpservice" class="com.cogzy.gtruckways.serviceImpl.OtpServiceImpl">
+		<property name="udao" ref="dao2"></property>
+		<property name="pdao" ref="dao3"></property>
+	</bean>
+	
+	<bean id="loginservice" class="com.cogzy.gtruckways.serviceImpl.LoginServiceImpl">
+		<property name="udao" ref="dao2"></property>
+		<property name="pdao" ref="dao3"></property>
+	</bean>
+	<bean id="trackservice" class="com.cogzy.gtruckways.serviceImpl.TrackServiceImpl">
+		<property name="udao" ref="dao2"></property>
+		<property name="pdao" ref="dao3"></property>
+	</bean>
+	
+	<bean id="cancelservice" class="com.cogzy.gtruckways.serviceImpl.CancelServiceImpl">
+		<property name="udao" ref="dao2"></property>
+		<property name="pdao" ref="dao3"></property>
+	</bean>
+	
+	<bean id="dao4" class="com.cogzy.gtruckways.daoImpl.EnterpriseCustomerDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+	<bean id="enterpriseservice" class="com.cogzy.gtruckways.serviceImpl.EnterpriseServiceImpl">
+		<property name="ecdao" ref="dao4"></property>
+		<property name="accountdao" ref="accountdao"></property>
+		</bean>
+<!-- 	<bean id="controller" class="com.cogzy.gtruckways.controller.GetPriceController">
+		<property name="priceservice" ref="service"></property>
+	</bean> -->
+
+<bean id="PostDao" class="com.cogzy.gtruckways.daoImpl.TelePostDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+ <bean id="post" class="com.cogzy.gtruckways.serviceImpl.TelePostServiceImpl">
+		<property name="PostDao" ref="PostDao"></property>
+		<property name="driverdao" ref="DriverDao"></property>
+	</bean>
+
+	<bean id="TransporterDao" class="com.cogzy.gtruckways.daoImpl.TransporterDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+ 	<bean id="transporter" class="com.cogzy.gtruckways.serviceImpl.TransporterServiceImpl">
+		<property name="TransporterDao" ref="TransporterDao"></property>
+		<property name="ecdao" ref="dao4"></property>
+	</bean>
+
+<bean id="DriverDao" class="com.cogzy.gtruckways.daoImpl.DriverDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+
+	<bean id="driver" class="com.cogzy.gtruckways.serviceImpl.DriverServiceImpl">
+		<property name="driverdao" ref="DriverDao"></property>
+		<property name="PostDao" ref="PostDao"></property>
+		
+	</bean>
+
+<bean id="CustomerDao" class="com.cogzy.gtruckways.daoImpl.CustomerAppDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+	
+	<bean id="customerService" class="com.cogzy.gtruckways.serviceImpl.CustomerServiceImpl">
+	<property name="customerdao" ref="CustomerDao"></property>
+</bean>
+<bean id="accountdao" class="com.cogzy.gtruckways.daoImpl.AccountManagerDaoImpl">
+		<property name="template" ref="jt"></property>
+	</bean>
+
+<bean id="accountservice" class="com.cogzy.gtruckways.serviceImpl.AccountManagerServiceImpl">
+	<property name="accountdao" ref="accountdao"></property>
+</bean>
+<bean id="smsservice" class="com.cogzy.gtruckways.serviceImpl.SmsServiceImpl">
+</bean>
+
+<bean id="multipartResolver"   
+class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<property name="maxUploadSize" value="50000000" />
+</bean>
+
+
+
+</beans>  
