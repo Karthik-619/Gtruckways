@@ -2,12 +2,16 @@ package com.cogzy.gtruckways.businessObjects;
 
 public class Accounts {
 
+	
+	// accounts class gtruckways
 	private int accountsId;
 	private String acctType;
 	private String userType;
 	private int addressId;
 	private int billcycleId;
 	private User user;
+	
+	
 	
 	public User getUser() {
 		return user;
