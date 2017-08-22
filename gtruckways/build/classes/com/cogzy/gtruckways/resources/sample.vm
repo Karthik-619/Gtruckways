@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <table width="99%">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+               
+                123 Street Address<br/>
+                TownName, State 01920-1223<br/><br/>
+                (800) 555-1212<br/>
+                billing@example.com<br/>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="right">
+          <table>
+            <tr>
+              <td align="right">
+                <h1>Invoice</h1>
+               
+                Invoice #12345<br/>
+                PO 45646<br/><br/>
+                <strong>ATTN Karthik<br/>
+                Cogzy</strong>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><hr/></td>
+      </tr>
+      <tr>
+        <td  colspan="2" align="center">
+          <table width="80%">
+            <tr>
+              <td  align="left">
+Dear User,<br/><br/>
+    
+Below please find a detailed cost breakdown for our recently 
+completed work. Please make payment at your earliest convenience, 
+and do not hesitate to contact me should you have any questions.<br/>
+<br/>
+    
+Many thanks,<br/>
+Amaury Valdes<br/><br/>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <table width="80%" bgcolor="#9EC5FF" border="1" 
+								bordercolor="#888" cellspacing="0" cellpadding="4">
+            <tr>
+              <th align="left">#</th>
+              <th align="left">Item Description</th>
+              <th align="left">Quantity</th>
+              <th align="left">Unit Price ($)</th>
+              <th align="left">Total ($)</th>
+            </tr>
+          
+              <tr bgcolor="$color">
+                <td align="left">1</td>
+                <td align="left">20</td>
+                <td align="center">30</td>
+                <td align="right">20</td>
+               
+                <td align="right">${telePostinfo.totalAmount}</td>
+              </tr>
+         
+            <tr bgcolor="#E3EEFF">
+              <td colspan="4" align="left"><strong>Subtotal</strong></td>
+              <td align="right">6556</td> 
+            </tr>
+            <tr bgcolor="#E3EEFF">
+           
+              <td colspan="4" align="left"><strong>
+							
+							</strong></td>
+              <td align="right"></td>
+            </tr>
+            <tr bgcolor="#9EC5FF">
+             
+              <td colspan="4" align="left"><strong>Total</strong></td>
+              <td align="right">${telePostinfo.totalAmount}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
