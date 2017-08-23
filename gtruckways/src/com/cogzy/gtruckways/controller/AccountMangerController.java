@@ -62,7 +62,7 @@ import com.cogzy.gtruckways.validator.Log;
 public class AccountMangerController extends HttpServlet {
 
 	
-	// account manager controller
+	// account manager Controller
 	
 	@Autowired 
 	AccountManagerServiceImpl accountservice;
