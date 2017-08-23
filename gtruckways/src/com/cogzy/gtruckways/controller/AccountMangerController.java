@@ -61,6 +61,9 @@ import com.cogzy.gtruckways.validator.Log;
 @SessionAttributes({"enterpriseInfo","scheduleInfo","odometer","seoInfo"})
 public class AccountMangerController extends HttpServlet {
 
+	
+	// account manager controller
+	
 	@Autowired 
 	AccountManagerServiceImpl accountservice;
 	@Autowired
